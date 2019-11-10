@@ -4,14 +4,27 @@
     <button v-on:click="createMyDeck">手札を作る</button>
     </div>
     <div v-else>
+        <img :src=first_card>
         <input type="checkbox" v-model="isChange[0]">
         <label for="checkbox" id="0">{{ myDeck[0]%13+1 }}{{ mySuit[0] }}</label>
+
+        
+        <img :src=second_card>
         <input type="checkbox" v-model="isChange[1]">
         <label for="checkbox" id="1">{{ myDeck[1]%13+1 }}{{ mySuit[1] }}</label>
+
+        
+        <img :src=third_card>
         <input type="checkbox" v-model="isChange[2]">
         <label for="checkbox" id="2">{{ myDeck[2]%13+1 }}{{ mySuit[2] }}</label>
+
+        
+        <img :src=forth_card>
         <input type="checkbox" v-model="isChange[3]">
         <label for="checkbox" id="3">{{ myDeck[3]%13+1 }}{{ mySuit[3] }}</label>
+
+        
+        <img :src=fifth_card>
         <input type="checkbox" v-model="isChange[4]">
         <label for="checkbox" id="4">{{ myDeck[4]%13+1 }}{{ mySuit[4] }}</label>
 
@@ -40,7 +53,12 @@ export default{
         FullHouse_judge:false,
         ThreeCard_judge:false,
         TwoPair_judge:false,
-        OnePair_judge:false
+        OnePair_judge:false,
+        first_card_path:'',
+        second_card_path:'',
+        third_card_path:'',
+        forth_card_path:'',
+        fifth_card_path:''
       }
     },
     
@@ -249,7 +267,24 @@ export default{
                     this.mySuit.push(this.suit[3])
                 }
             }
-        }
+        },
+    },
+    computed:{
+        first_card:function(){
+          return require("@/assets/trumps/"+this.myDeck[0]+".png")
+        },
+        second_card:function(){
+          return require("@/assets/trumps/"+this.myDeck[1]+".png")
+        },
+        third_card:function(){
+          return require("@/assets/trumps/"+this.myDeck[2]+".png")
+        },
+        forth_card:function(){
+          return require("@/assets/trumps/"+this.myDeck[3]+".png")
+        },
+        fifth_card:function(){
+          return require("@/assets/trumps/"+this.myDeck[4]+".png")
+        },
     }
 }
 </script>
