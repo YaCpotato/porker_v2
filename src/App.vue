@@ -101,8 +101,11 @@
         </div>
     </div>
   </div>
-  <div id="main-footer" style="width:100%;height:150px;background-color:#DCDFE6;padding:20px;margin-top:20px;">
-    <div id="icon_space" style="height:100px;vertical-align: middle;text-align:center;float:right;margin:20px;">
+  <div id="main-footer" style="width:100%;height:200px;background-color:#DCDFE6;padding:20px;margin-top:20px;">
+    <div id="sponcer" style="width:50%;display: inline-block;">
+    <p>トランプ<br><a href="https://pixabay.com/ja/users/WikimediaImages-1185597/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=884206">WikimediaImages</a>による<a href="https://pixabay.com/ja/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=884206">Pixabay</a>からの画像</p>
+    </div>
+    <div id="icon_space" style="height:100px;width:10%;vertical-align: middle;text-align:center;float:right;margin:20px;display: inline-block;">
         <div><a href="https://github.com/YaCpotato" style="font-size:20px;"><img src="@/assets/begin_dialog/GitHub-Mark-64px.png" style="width:50px;height:auto;"></a></div>
         <div><a href="https://twitter.com/Yasshieeee"><img src="@/assets/begin_dialog/Twitter_Logo_Blue.png" style="width:80px;height:auto;object-fit: cover;"></a></div>
     </div>
