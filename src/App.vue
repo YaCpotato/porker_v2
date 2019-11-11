@@ -96,7 +96,12 @@
         <label for="checkbox" id="3">{{ myDeck[3]%13+1 }}{{ mySuit[3] }}</label>
         <label for="checkbox" id="4">{{ myDeck[4]%13+1 }}{{ mySuit[4] }}</label-->
         <div id="operations" style="margin-top:20px;margin-buttom:20px;">
-            <el-button class="ope_button" type="primary" v-on:click="deckChange" style="margin:10px;">Change Cards!</el-button>
+            <div v-if="exchange_phase>0" style="display:inline-block;">
+                <el-button class="ope_button" type="primary" v-on:click="deckChange" style="margin:10px;">Change Cards!</el-button>
+            </div>
+            <div v-else style="display:inline-block;">
+                <el-button disabled class="ope_button" type="primary" v-on:click="deckChange" style="margin:10px;">Change Cards!</el-button>
+            </div>
             <el-button class="ope_button" type="primary" v-on:click="AllRoleJudge" style="margin:10px;">Ready</el-button>
         </div>
     </div>
@@ -138,17 +143,6 @@ export default{
         forth_card_path:'',
         fifth_card_path:'',
         exchange_phase:3,
-        notifyment:[
-            "ようこそ！楽しんでいってください！",
-            "カードを引きましょう！",
-            "１回目に交換するカードを選んでください！",
-            "新しいカードが来ましたよ！",
-            "２回目に交換するカードを選んでください！",
-            "新しいカードが来ましたよ！",
-            "３回目に交換するカードを選んでください！",
-            "新しいカードが来ましたよ！",
-            "さあ！勝負です！",
-        ],
         visible:false
       }
     },
@@ -158,6 +152,23 @@ export default{
             this.Deck.push(i)
         }
         this.visible=true 
+    },
+    watch:{
+        visible:function(val,oldval){
+            if(!val){
+                this.$toasted.show("ようこそ！楽しんでいってください！");
+                this.$toasted.show("カードを引きましょう！");
+            }
+        },
+        exchange_phase:function(val,oldval){
+            if(val == 2){
+                this.$toasted.show("２回目に交換するカードを選んでください！");
+            }else if(val == 1){
+                this.$toasted.show("３回目に交換するカードを選んでください！");
+            }else if(val == 0){
+                this.$toasted.show("さあ！勝負です！");
+            }
+        }
     },
     methods:{
       Flash:function(){//フラッシュ判定
@@ -331,19 +342,25 @@ export default{
             }
             this.desideSuit()
             this.isActive=!this.isActive
-            //テストケースはここに記述する
+            this.$toasted.show("１回目に交換するカードを選んでください！");
         },
         
         //商、余をだす関数
         deckChange:function(event){//手札を変える
+        this.exchange_phase -= 1
+        var change = false
             //指定された添字のカードを再度乱数から数字を得る
             for(var i=0;i<5;i++){
                 if(this.isChange[i]){
+                    change = true
                     var num=Math.floor(Math.random()*this.Deck.length)//デッキのインデックスを乱数で
                     this.myDeck.splice(i,1,this.Deck[num])
                     this.Deck.splice(num,1)//手札に入れた$ものをデッキから削除する
                     this.mySuit.splice(i,1,this.suit[Math.floor(this.myDeck[i]/13)])
                 }
+            }
+            if(change){
+                this.$toasted.show("新しいカードがきましたよ！");
             }
         },
         desideSuit:function(){
