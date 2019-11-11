@@ -1,12 +1,11 @@
 <template>
     <div id="main">
-        
+    <div id="main-header">
+        <h1>Yasshieeee's Porker</h1>
+    </div>
+    <div id="main_body" style="height:500px;">
     <el-dialog :visible.sync="visible">
         <h2>Welcome to Yasshieeee's porker!</h2>
-        <!--div id="icon_space" style="height:100px;vertical-align: middle;text-align:center;">
-            <div><a href="https://github.com/YaCpotato" style="font-size:20px;"><img src="@/assets/begin_dialog/GitHub-Mark-64px.png" style="width:50px;height:auto;"></a></div>
-            <div><a href="https://twitter.com/Yasshieeee"><img src="@/assets/begin_dialog/Twitter_Logo_Blue.png" style="width:80px;height:auto;object-fit: cover;"></a></div>
-        </div-->
     <img src="@/assets/begin_dialog/cat_koubakozuwari_brown.png" style="width:200px;height:auto">
     <p>遊んでいくニャ〜</p>
     <div slot="footer" class="dialog-footer" style="text-align:center;">
@@ -17,32 +16,17 @@
     <div v-if="isActive">
         <table id="play_table" border="1" align="center">
             <tr id="card_space">
-                <td class="card">
-                </td>
-                <td class="card">
-                </td>
-                <td class="card">
-                </td>
-                <td class="card">
-                </td>
-                <td class="card">
-                </td>
+                <td class="card"></td>
+                <td class="card"></td>
+                <td class="card"></td>
+                <td class="card"></td>
+                <td class="card"></td>
             </tr>
             <tr id="button_space">
-                <td>
-                    
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
-                <td>
-                </td>
+                <td></td><td></td><td></td><td></td><td></td>
             </tr>
         </table>
-    <el-button type="primary" v-on:click="createMyDeck">手札を作る</el-button>
+    <el-button type="primary" v-on:click="createMyDeck" style="margin:20px;width:200px;">Create my Deck!</el-button>
     </div>
     <div v-else>
         <table id="play_table" border="1" align="center">
@@ -66,42 +50,42 @@
             <tr id="button_space">
                 <td>
                     <div v-if="isChange[0]">
-                        <el-checkbox-button v-model="isChange[0]">CHANGE!</el-checkbox-button>
+                        <el-checkbox v-model="isChange[0]">CHANGE!</el-checkbox>
                     </div>
                     <div v-else>
-                        <el-checkbox-button v-model="isChange[0]">CHANGE?</el-checkbox-button>
+                        <el-checkbox v-model="isChange[0]">CHANGE?</el-checkbox>
                     </div>
                 </td>
                 <td>
                     <div v-if="isChange[1]">
-                        <el-checkbox-button v-model="isChange[1]">CHANGE!</el-checkbox-button>
+                        <el-checkbox v-model="isChange[1]">CHANGE!</el-checkbox>
                     </div>
                     <div v-else>
-                        <el-checkbox-button v-model="isChange[1]">CHANGE?</el-checkbox-button>
+                        <el-checkbox v-model="isChange[1]">CHANGE?</el-checkbox>
                     </div>
                 </td>
                 <td>
                     <div v-if="isChange[2]">
-                        <el-checkbox-button v-model="isChange[2]">CHANGE!</el-checkbox-button>
+                        <el-checkbox v-model="isChange[2]">CHANGE!</el-checkbox>
                     </div>
                     <div v-else>
-                        <el-checkbox-button v-model="isChange[2]">CHANGE?</el-checkbox-button>
+                        <el-checkbox v-model="isChange[2]">CHANGE?</el-checkbox>
                     </div>
                 </td>
                 <td>
                     <div v-if="isChange[3]">
-                        <el-checkbox-button v-model="isChange[3]">CHANGE!</el-checkbox-button>
+                        <el-checkbox v-model="isChange[3]">CHANGE!</el-checkbox>
                     </div>
                     <div v-else>
-                        <el-checkbox-button v-model="isChange[3]">CHANGE?</el-checkbox-button>
+                        <el-checkbox v-model="isChange[3]">CHANGE?</el-checkbox>
                     </div>
                 </td>
                 <td>
                     <div v-if="isChange[4]">
-                        <el-checkbox-button v-model="isChange[4]">CHANGE!</el-checkbox-button>
+                        <el-checkbox v-model="isChange[4]">CHANGE!</el-checkbox>
                     </div>
                     <div v-else>
-                        <el-checkbox-button v-model="isChange[4]">CHANGE?</el-checkbox-button>
+                        <el-checkbox v-model="isChange[4]">CHANGE?</el-checkbox>
                     </div>
                 </td>
             </tr>
@@ -111,12 +95,19 @@
         <label for="checkbox" id="2">{{ myDeck[2]%13+1 }}{{ mySuit[2] }}</label>
         <label for="checkbox" id="3">{{ myDeck[3]%13+1 }}{{ mySuit[3] }}</label>
         <label for="checkbox" id="4">{{ myDeck[4]%13+1 }}{{ mySuit[4] }}</label-->
-        <div id="operations">
-            <el-button class="ope_button" type="primary" v-on:click="deckChange">手札を変える</el-button>
-            <el-button class="ope_button" type="primary" v-on:click="AllRoleJudge">判定</el-button>
+        <div id="operations" style="margin-top:20px;margin-buttom:20px;">
+            <el-button class="ope_button" type="primary" v-on:click="deckChange" style="margin:10px;">Change Cards!</el-button>
+            <el-button class="ope_button" type="primary" v-on:click="AllRoleJudge" style="margin:10px;">Ready</el-button>
         </div>
     </div>
   </div>
+  <div id="main-footer" style="width:100%;height:150px;background-color:#DCDFE6;padding:20px;margin-top:20px;">
+    <div id="icon_space" style="height:100px;vertical-align: middle;text-align:center;float:right;margin:20px;">
+        <div><a href="https://github.com/YaCpotato" style="font-size:20px;"><img src="@/assets/begin_dialog/GitHub-Mark-64px.png" style="width:50px;height:auto;"></a></div>
+        <div><a href="https://twitter.com/Yasshieeee"><img src="@/assets/begin_dialog/Twitter_Logo_Blue.png" style="width:80px;height:auto;object-fit: cover;"></a></div>
+    </div>
+  </div>
+</div>
 </template>
 <script>
 import element from 'element'
@@ -387,7 +378,9 @@ export default{
 }
 </script>
 <style>
+@import url("https://fonts.googleapis.com/css?family=Acme&display=swap");
 #main{
+    font-family: 'Acme', sans-serif;
     vertical-align: middle;
     text-align: center;
 }
@@ -409,7 +402,7 @@ export default{
     width:20vw;
 }
 
-#button_space > td:nth-child(1) > div > label > span{
+#button_space > td:nth-child(1) > div > label{
     width:20vw;
     background-color:darkgreen;
     border:none;
@@ -417,7 +410,7 @@ export default{
     font-size:20px;
     font-weight:bold;
 }
-#button_space > td:nth-child(2) > div > label > span{
+#button_space > td:nth-child(2) > div > label{
     width:20vw;
     background-color:darkgreen;
     border:none;
@@ -425,7 +418,7 @@ export default{
     font-size:20px;
     font-weight:bold;
 }
-#button_space > td:nth-child(3) > div > label > span{
+#button_space > td:nth-child(3) > div > label{
     width:20vw;
     background-color:darkgreen;
     border:none;
@@ -433,7 +426,7 @@ export default{
     font-size:20px;
     font-weight:bold;
 }
-#button_space > td:nth-child(4) > div > label > span{
+#button_space > td:nth-child(4) > div > label{
     width:20vw;
     background-color:darkgreen;
     border:none;
@@ -441,7 +434,7 @@ export default{
     font-size:20px;
     font-weight:bold;
 }
-#button_space > td:nth-child(5) > div > label > span{
+#button_space > td:nth-child(5) > div > label{
     width:20vw;
     background-color:darkgreen;
     border:none;
