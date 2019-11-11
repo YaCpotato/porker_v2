@@ -4,38 +4,79 @@
     <button v-on:click="createMyDeck">手札を作る</button>
     </div>
     <div v-else>
-        <img :src=first_card>
-        <input type="checkbox" v-model="isChange[0]">
+        <table>
+            <tr id="card_space">
+                <td>
+                    <img :src=first_card>
+                </td>
+                <td>
+                    <img :src=second_card>
+                </td>
+                <td>
+                    <img :src=third_card>
+                </td>
+                <td>
+                    <img :src=forth_card>
+                </td>
+                <td>
+                    <img :src=fifth_card>
+                </td>
+            </tr>
+            <tr id="button_space">
+                <td>
+                    <div v-if="isChange[0]">
+                        <el-checkbox-button v-model="isChange[0]">CHANGE!</el-checkbox-button>
+                    </div>
+                    <div v-else>
+                        <el-checkbox-button v-model="isChange[0]">CHANGE?</el-checkbox-button>
+                    </div>
+                </td>
+                <td>
+                    <div v-if="isChange[1]">
+                        <el-checkbox-button v-model="isChange[1]">CHANGE!</el-checkbox-button>
+                    </div>
+                    <div v-else>
+                        <el-checkbox-button v-model="isChange[1]">CHANGE?</el-checkbox-button>
+                    </div>
+                </td>
+                <td>
+                    <div v-if="isChange[2]">
+                        <el-checkbox-button v-model="isChange[2]">CHANGE!</el-checkbox-button>
+                    </div>
+                    <div v-else>
+                        <el-checkbox-button v-model="isChange[2]">CHANGE?</el-checkbox-button>
+                    </div>
+                </td>
+                <td>
+                    <div v-if="isChange[3]">
+                        <el-checkbox-button v-model="isChange[3]">CHANGE!</el-checkbox-button>
+                    </div>
+                    <div v-else>
+                        <el-checkbox-button v-model="isChange[3]">CHANGE?</el-checkbox-button>
+                    </div>
+                </td>
+                <td>
+                    <div v-if="isChange[4]">
+                        <el-checkbox-button v-model="isChange[4]">CHANGE!</el-checkbox-button>
+                    </div>
+                    <div v-else>
+                        <el-checkbox-button v-model="isChange[4]">CHANGE?</el-checkbox-button>
+                    </div>
+                </td>
+            </tr>
+        </table>
         <label for="checkbox" id="0">{{ myDeck[0]%13+1 }}{{ mySuit[0] }}</label>
-
-        
-        <img :src=second_card>
-        <input type="checkbox" v-model="isChange[1]">
         <label for="checkbox" id="1">{{ myDeck[1]%13+1 }}{{ mySuit[1] }}</label>
-
-        
-        <img :src=third_card>
-        <input type="checkbox" v-model="isChange[2]">
         <label for="checkbox" id="2">{{ myDeck[2]%13+1 }}{{ mySuit[2] }}</label>
-
-        
-        <img :src=forth_card>
-        <input type="checkbox" v-model="isChange[3]">
         <label for="checkbox" id="3">{{ myDeck[3]%13+1 }}{{ mySuit[3] }}</label>
-
-        
-        <img :src=fifth_card>
-        <input type="checkbox" v-model="isChange[4]">
         <label for="checkbox" id="4">{{ myDeck[4]%13+1 }}{{ mySuit[4] }}</label>
-
-        <button v-on:click="deckChange">手札を変える</button>
-    </div>
-    <div id="role">
-        <button v-on:click="AllRoleJudge">判定</button>
+            <el-button class="ope_button" type="primary" v-on:click="deckChange">手札を変える</el-button>
+            <el-button class="ope_button" type="primary" v-on:click="AllRoleJudge">判定</el-button>
     </div>
   </div>
 </template>
 <script>
+import element from 'element'
 export default{
     data(){
       return{
@@ -289,24 +330,7 @@ export default{
 }
 </script>
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.ope_button{
+    width:200px;
 }
 </style>
