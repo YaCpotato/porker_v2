@@ -1,24 +1,65 @@
 <template>
-    <div id="deck">
+    <div id="main">
+        
+    <el-dialog :visible.sync="visible">
+        <h2>Welcome to Yasshieeee's porker!</h2>
+        <!--div id="icon_space" style="height:100px;vertical-align: middle;text-align:center;">
+            <div><a href="https://github.com/YaCpotato" style="font-size:20px;"><img src="@/assets/begin_dialog/GitHub-Mark-64px.png" style="width:50px;height:auto;"></a></div>
+            <div><a href="https://twitter.com/Yasshieeee"><img src="@/assets/begin_dialog/Twitter_Logo_Blue.png" style="width:80px;height:auto;object-fit: cover;"></a></div>
+        </div-->
+    <img src="@/assets/begin_dialog/cat_koubakozuwari_brown.png" style="width:200px;height:auto">
+    <p>遊んでいくニャ〜</p>
+    <div slot="footer" class="dialog-footer" style="text-align:center;">
+      <el-button type="primary" @click="visible = false" style="width:50%">遊ぶ!</el-button>
+    </div>
+  </el-dialog>
+  
     <div v-if="isActive">
-    <button v-on:click="createMyDeck">手札を作る</button>
+        <table id="play_table" border="1" align="center">
+            <tr id="card_space">
+                <td class="card">
+                </td>
+                <td class="card">
+                </td>
+                <td class="card">
+                </td>
+                <td class="card">
+                </td>
+                <td class="card">
+                </td>
+            </tr>
+            <tr id="button_space">
+                <td>
+                    
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+    <el-button type="primary" v-on:click="createMyDeck">手札を作る</el-button>
     </div>
     <div v-else>
-        <table>
+        <table id="play_table" border="1" align="center">
             <tr id="card_space">
-                <td>
+                <td class="card">
                     <img :src=first_card>
                 </td>
-                <td>
+                <td class="card">
                     <img :src=second_card>
                 </td>
-                <td>
+                <td class="card">
                     <img :src=third_card>
                 </td>
-                <td>
+                <td class="card">
                     <img :src=forth_card>
                 </td>
-                <td>
+                <td class="card">
                     <img :src=fifth_card>
                 </td>
             </tr>
@@ -65,13 +106,15 @@
                 </td>
             </tr>
         </table>
-        <label for="checkbox" id="0">{{ myDeck[0]%13+1 }}{{ mySuit[0] }}</label>
+        <!--label for="checkbox" id="0">{{ myDeck[0]%13+1 }}{{ mySuit[0] }}</label>
         <label for="checkbox" id="1">{{ myDeck[1]%13+1 }}{{ mySuit[1] }}</label>
         <label for="checkbox" id="2">{{ myDeck[2]%13+1 }}{{ mySuit[2] }}</label>
         <label for="checkbox" id="3">{{ myDeck[3]%13+1 }}{{ mySuit[3] }}</label>
-        <label for="checkbox" id="4">{{ myDeck[4]%13+1 }}{{ mySuit[4] }}</label>
+        <label for="checkbox" id="4">{{ myDeck[4]%13+1 }}{{ mySuit[4] }}</label-->
+        <div id="operations">
             <el-button class="ope_button" type="primary" v-on:click="deckChange">手札を変える</el-button>
             <el-button class="ope_button" type="primary" v-on:click="AllRoleJudge">判定</el-button>
+        </div>
     </div>
   </div>
 </template>
@@ -99,14 +142,28 @@ export default{
         second_card_path:'',
         third_card_path:'',
         forth_card_path:'',
-        fifth_card_path:''
+        fifth_card_path:'',
+        exchange_phase:3,
+        notifyment:[
+            "ようこそ！楽しんでいってください！",
+            "カードを引きましょう！",
+            "１回目に交換するカードを選んでください！",
+            "新しいカードが来ましたよ！",
+            "２回目に交換するカードを選んでください！",
+            "新しいカードが来ましたよ！",
+            "３回目に交換するカードを選んでください！",
+            "新しいカードが来ましたよ！",
+            "さあ！勝負です！",
+        ],
+        visible:false
       }
     },
     
     created:function(){
         for(var i=0;i<53;i++){
             this.Deck.push(i)
-        }        
+        }
+        this.visible=true 
     },
     methods:{
       Flash:function(){//フラッシュ判定
@@ -330,7 +387,66 @@ export default{
 }
 </script>
 <style>
+#main{
+    vertical-align: middle;
+    text-align: center;
+}
+#play_table{
+    border-collapse: collapse;
+    background-color: darkgreen;
+}
+#operations{
+    margin:20px;
+}
 .ope_button{
     width:200px;
+    margin-right:10px;
+    margin-left:10px;
+}
+
+.card{
+    height:400px;
+    width:20vw;
+}
+
+#button_space > td:nth-child(1) > div > label > span{
+    width:20vw;
+    background-color:darkgreen;
+    border:none;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+#button_space > td:nth-child(2) > div > label > span{
+    width:20vw;
+    background-color:darkgreen;
+    border:none;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+#button_space > td:nth-child(3) > div > label > span{
+    width:20vw;
+    background-color:darkgreen;
+    border:none;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+#button_space > td:nth-child(4) > div > label > span{
+    width:20vw;
+    background-color:darkgreen;
+    border:none;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
+}
+#button_space > td:nth-child(5) > div > label > span{
+    width:20vw;
+    background-color:darkgreen;
+    border:none;
+    color:white;
+    font-size:20px;
+    font-weight:bold;
 }
 </style>
