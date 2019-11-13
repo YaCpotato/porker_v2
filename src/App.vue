@@ -3,7 +3,7 @@
     <div id="main-header">
         <h1>Yasshieeee's Porker</h1>
     </div>
-    <div id="main_body" style="height:500px;">
+    <div id="main_body" style="height:700px;">
     <el-dialog :visible.sync="visible">
         <h2>Welcome to Yasshieeee's porker!</h2>
     <img src="@/assets/begin_dialog/cat_koubakozuwari_brown.png" style="width:200px;height:auto">
@@ -96,13 +96,16 @@
         <label for="checkbox" id="3">{{ myDeck[3]%13+1 }}{{ mySuit[3] }}</label>
         <label for="checkbox" id="4">{{ myDeck[4]%13+1 }}{{ mySuit[4] }}</label-->
         <div id="operations" style="margin-top:20px;margin-buttom:20px;">
-            <div v-if="exchange_phase>0" style="display:inline-block;">
-                <el-button class="ope_button" type="primary" v-on:click="deckChange" style="margin:10px;">Change Cards!</el-button>
+            <p id="typing" style="height:50px;"></p>
+            <div style="height:50px;">
+                <div v-if="exchange_phase>0" style="display:inline-block;">
+                    <el-button class="ope_button" type="primary" v-on:click="deckChange" style="margin:10px;">Change Cards!</el-button>
+                </div>
+                <div v-else style="display:inline-block;">
+                    <el-button disabled class="ope_button" type="primary" v-on:click="deckChange" style="margin:10px;">Change Cards!</el-button>
+                </div>
+                <el-button class="ope_button" type="primary" v-on:click="AllRoleJudge" style="margin:10px;">Ready</el-button>
             </div>
-            <div v-else style="display:inline-block;">
-                <el-button disabled class="ope_button" type="primary" v-on:click="deckChange" style="margin:10px;">Change Cards!</el-button>
-            </div>
-            <el-button class="ope_button" type="primary" v-on:click="AllRoleJudge" style="margin:10px;">Ready</el-button>
         </div>
     </div>
   </div>
@@ -399,6 +402,27 @@ export default{
                 }
             }
         },
+    },
+    watch:{
+        players_role:function(val){
+            function typing(str = val){
+                let buf = document.getElementById("typing").innerHTML; //書き込み済みの文字を要素から取得
+                let writed = buf.length; //書き込み済みの文字数を取得
+                let write = "";
+                if(writed < str.length){
+                    write = str.charAt(writed); //1文字だけ取得する
+                }else{
+                    buf = ""; //今回は何度も繰り返すために内容を消去します
+                }
+                document.getElementById("typing").innerHTML = buf + write; //1文字だけ追加していく
+            }
+
+            const str = document.getElementById("typing").innerHTML; //書き込む文字を要素から取得
+            const delay = 200 //1文字が表示される時間
+
+            document.getElementById("typing").innerHTML = "";
+            window.setInterval(function(){typing(val);}, delay);
+        }
     },
     computed:{
         first_card:function(){
