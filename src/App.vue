@@ -96,7 +96,7 @@
         <label for="checkbox" id="3">{{ myDeck[3]%13+1 }}{{ mySuit[3] }}</label>
         <label for="checkbox" id="4">{{ myDeck[4]%13+1 }}{{ mySuit[4] }}</label-->
         <div id="operations" style="margin-top:20px;margin-buttom:20px;">
-            <p id="typing" style="height:50px;"></p>
+            <p id="typing" style="height:50px;font-size:28px;font-weight:bold;font-family:'Acme', sans-serif;"></p>
             <div style="height:50px;">
                 <div v-if="exchange_phase>0" style="display:inline-block;">
                     <el-button class="ope_button" type="primary" v-on:click="deckChange" style="margin:10px;">Change Cards!</el-button>
@@ -152,6 +152,14 @@ export default{
     },
     
     created:function(){
+        this.Flash_judge=false
+        this.Straight_judge=false
+        this.RoyalStraight_judge=false
+        this.FourCard_judge=false
+        this.FullHouse_judge=false
+        this.ThreeCard_judge=false
+        this.TwoPair_judge=false
+        this.OnePair_judge=false
         for(var i=0;i<53;i++){
             this.Deck.push(i)
         }
@@ -172,6 +180,26 @@ export default{
             }else if(val == 0){
                 this.$toasted.show("さあ！勝負です！");
             }
+        },
+        players_role:function(val){
+            function typing(str = val){
+                let buf = document.getElementById("typing").innerHTML; //書き込み済みの文字を要素から取得
+                let writed = buf.length; //書き込み済みの文字数を取得
+                let write = "";
+                if(writed < str.length){
+                    write = str.charAt(writed); //1文字だけ取得する
+                }else{
+                    buf = ""; //今回は何度も繰り返すために内容を消去します
+                }
+                document.getElementById("typing").innerHTML = buf + write; //1文字だけ追加していく
+            }
+
+            const str = document.getElementById("typing").innerHTML; //書き込む文字を要素から取得
+            const delay = 200 //1文字が表示される時間
+
+            document.getElementById("typing").innerHTML = "";
+            window.setInterval(function(){typing(val);}, delay);
+            return;
         }
     },
     methods:{
@@ -402,27 +430,6 @@ export default{
                 }
             }
         },
-    },
-    watch:{
-        players_role:function(val){
-            function typing(str = val){
-                let buf = document.getElementById("typing").innerHTML; //書き込み済みの文字を要素から取得
-                let writed = buf.length; //書き込み済みの文字数を取得
-                let write = "";
-                if(writed < str.length){
-                    write = str.charAt(writed); //1文字だけ取得する
-                }else{
-                    buf = ""; //今回は何度も繰り返すために内容を消去します
-                }
-                document.getElementById("typing").innerHTML = buf + write; //1文字だけ追加していく
-            }
-
-            const str = document.getElementById("typing").innerHTML; //書き込む文字を要素から取得
-            const delay = 200 //1文字が表示される時間
-
-            document.getElementById("typing").innerHTML = "";
-            window.setInterval(function(){typing(val);}, delay);
-        }
     },
     computed:{
         first_card:function(){
