@@ -143,7 +143,8 @@ export default{
         forth_card_path:'',
         fifth_card_path:'',
         exchange_phase:3,
-        visible:false
+        visible:false,
+        players_role:''
       }
     },
     
@@ -178,6 +179,7 @@ export default{
                     return 0;
                 }
             }
+            this.Flash_judge=true
         },
 
         Straight:function(){
@@ -333,6 +335,26 @@ export default{
             this.FullHouse()
             this.ThreeCard()
             this.Pair()
+
+            if(this.Flash_judge && this.RoyalStraight_judge){
+                this.players_role = 'Royal Straight Flash!!'
+            }else if(this.RoyalStraight_judge){
+                this.players_role = 'Royal Straight!!'
+            }else if(this.Straight_judge){
+                this.players_role = 'Straight!!'
+            }else if(this.Flash_judge){
+                this.players_role = 'Flash!!'
+            }else if(this.FourCard_judge){
+                this.players_role = 'Four Card!!'
+            }else if(this.FullHouse_judge){
+                this.players_role = 'Full House!!'
+            }else if(this.ThreeCard_judge){
+                this.players_role = 'Three Card!!'
+            }else if(this.TwoPair_judge){
+                this.players_role = 'Two Pair!!'
+            }else if(this.OnePair_judge){
+                this.players_role = 'One Pair!!'
+            }
         },
         createMyDeck:function(event){//手札を作る
             for(var i=0;i<5;i++){
